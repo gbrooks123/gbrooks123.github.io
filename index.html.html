@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garrett Brooks — Technical Communication</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1c1c1c;
+    --ink-mid: #555;
+    --ink-soft: #888;
+    --rule: #e0e0e0;
+    --bg: #fafafa;
+    --white: #ffffff;
+    --accent: #1c1c1c;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* LAYOUT */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 120px 48px 100px;
+  }
+
+  /* HERO */
+  .hero {
+    padding-bottom: 72px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 72px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(44px, 7vw, 72px);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-mid);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+
+  .contact-item {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .contact-item:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  /* SECTIONS */
+  section { margin-bottom: 72px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* OBJECTIVE */
+  .objective-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-style: italic;
+    max-width: 680px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    border: 1px solid var(--rule);
+    padding: 6px 14px;
+    border-radius: 2px;
+    background: var(--white);
+    letter-spacing: 0.01em;
+  }
+
+  /* EDUCATION & EXPERIENCE */
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .entry:first-of-type { padding-top: 0; }
+  .entry:last-of-type { border-bottom: none; }
+
+  .entry-left { }
+
+  .entry-org {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  .entry-role {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    margin-bottom: 10px;
+  }
+
+  .entry-date {
+    font-size: 13px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    padding-top: 4px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .entry-detail {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .entry-bullets {
+    margin-top: 10px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .entry-bullets li {
+    font-size: 14px;
+    color: var(--ink-mid);
+    padding: 3px 0 3px 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .entry-bullets li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--rule);
+    font-weight: 300;
+  }
+
+  /* LEADERSHIP */
+  .leadership-entry {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .leadership-entry:last-of-type { border-bottom: none; }
+
+  /* ACADEMIC */
+  .academic-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .academic-list li {
+    font-size: 14px;
+    color: var(--ink-mid);
+    padding: 10px 0 10px 20px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .academic-list li:last-child { border-bottom: none; }
+
+  .academic-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--rule);
+  }
+
+  /* DOWNLOAD BAR */
+  .download-bar {
+    background: var(--ink);
+    color: var(--white);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .download-bar-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .download-btn {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.2s;
+    border-radius: 2px;
+  }
+
+  .download-btn:hover { background: rgba(255,255,255,0.1); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 24px; }
+    .page { padding: 100px 24px 80px; }
+    .entry { grid-template-columns: 1fr; }
+    .download-bar { padding: 20px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Garrett Brooks</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero" id="about">
+    <div class="hero-eyebrow">Denton, Texas — Open to work</div>
+    <h1>Garrett<br>Brooks</h1>
+    <p class="hero-sub">Technical Communication student at UNT with a background in customer service, retail, and academic research. Good at writing clearly, picking things up fast, and showing up consistently.</p>
+    <div class="contact-row">
+      <a href="tel:9727652558" class="contact-item">972-765-2558</a>
+      <a href="mailto:garrettwilliambrooks@gmail.com" class="contact-item">garrettwilliambrooks@gmail.com</a>
+      <a href="https://linkedin.com/in/garrett-brooks-114b39355" class="contact-item" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <section id="objective">
+    <div class="section-label">Objective</div>
+    <p class="objective-text">Looking for work in any field where strong communication, a willingness to learn, and the ability to get things done actually matter.</p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Skills</div>
+    <div class="skills-grid">
+      <span class="skill-tag">Written Communication</span>
+      <span class="skill-tag">Proofreading & Editing</span>
+      <span class="skill-tag">AP / APA / Chicago Style</span>
+      <span class="skill-tag">Research & Analysis</span>
+      <span class="skill-tag">Microsoft 365</span>
+      <span class="skill-tag">Google Workspace</span>
+      <span class="skill-tag">Canva</span>
+      <span class="skill-tag">Basic HTML & CSS</span>
+      <span class="skill-tag">Customer Service</span>
+      <span class="skill-tag">Inventory Management</span>
+      <span class="skill-tag">Team Collaboration</span>
+      <span class="skill-tag">Quick Learner</span>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Work Experience</div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Kroger</div>
+        <div class="entry-role">Personal Shopper</div>
+        <ul class="entry-bullets">
+          <li>Fulfills customer grocery orders accurately and efficiently under strict time constraints.</li>
+          <li>Navigates store systems and inventory to locate and substitute items as needed.</li>
+          <li>Maintains high order accuracy while managing multiple orders simultaneously.</li>
+          <li>Communicates with customers through the app to resolve issues and confirm substitutions.</li>
+        </ul>
+      </div>
+      <div class="entry-date">2025–Present</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Walmart</div>
+        <div class="entry-role">Stocking Team Associate</div>
+        <ul class="entry-bullets">
+          <li>Stocked and organized merchandise in multiple departments to help maintain and regulate store standards.</li>
+          <li>Unloaded heavy freight deliveries for hours at a time during evening shifts, requiring physical stamina and the ability to work independently.</li>
+          <li>Managed inventory accuracy by scanning and tracking product levels.</li>
+          <li>Worked both early morning and late night shifts requiring reliability and independent task management.</li>
+        </ul>
+      </div>
+      <div class="entry-date">2025</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Kroger</div>
+        <div class="entry-role">Produce Clerk / Personal Shopper</div>
+        <ul class="entry-bullets">
+          <li>Maintained produce department appearance, rotation, and inventory levels.</li>
+          <li>Assisted customers with product questions and provided friendly service.</li>
+          <li>Cross-trained as a personal shopper handling digital order fulfillment.</li>
+        </ul>
+      </div>
+      <div class="entry-date">2023</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Sprouts Farmers Market</div>
+        <div class="entry-role">Produce Clerk</div>
+        <ul class="entry-bullets">
+          <li>Stocked, rotated, and maintained fresh produce department.</li>
+          <li>Assisted customers with product selection and store navigation.</li>
+          <li>Supported team in maintaining cleanliness and department standards.</li>
+        </ul>
+      </div>
+      <div class="entry-date">2022</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Lucky Panda Restaurant</div>
+        <div class="entry-role">Delivery Driver</div>
+        <ul class="entry-bullets">
+          <li>Delivered food orders accurately and on time across assigned routes.</li>
+          <li>Handled cash and card transactions and maintained customer satisfaction.</li>
+          <li>Managed time efficiently across multiple deliveries during peak hours.</li>
+        </ul>
+      </div>
+      <div class="entry-date">2019–2022</div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Education</div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">University of North Texas</div>
+        <div class="entry-role">B.S., Technical Communication</div>
+        <div class="entry-detail">Anticipated Graduation May 2027  ·  GPA 3.4</div>
+      </div>
+      <div class="entry-date">2025–Present</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Texas State University</div>
+        <div class="entry-role">Digital Media</div>
+        <div class="entry-detail">Approx. 60 credit hours completed</div>
+      </div>
+      <div class="entry-date">2022–2025</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-left">
+        <div class="entry-org">Lewisville High School</div>
+        <div class="entry-role">High School Diploma</div>
+      </div>
+      <div class="entry-date">May 2022</div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section id="leadership">
+    <div class="section-label">Leadership & Volunteer Experience</div>
+    <div class="leadership-entry">
+      <div class="entry-org">Boy Scouts of America</div>
+      <div class="entry-role">Life Scout & Patrol Leader — Troop 451</div>
+      <ul class="entry-bullets" style="margin-top:10px;">
+        <li>Served as Patrol Leader responsible for organizing and leading a group of scouts during activities.</li>
+        <li>Assisted on multiple Eagle Scout projects involving community service and project coordination.</li>
+        <li>Volunteered at local soup kitchens and sports venues in support of community outreach.</li>
+        <li>Developed leadership, planning, and teamwork skills through years of scouting involvement.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ACADEMIC PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Academic Projects & Accomplishments</div>
+    <ul class="academic-list">
+      <li>Conducted a micro-workplace study on Women in Business at UNT involving primary research, data analysis, and written findings.</li>
+      <li>Developed an organic proposal for a UNT Parking Policy Revision addressing stakeholder needs and policy recommendations.</li>
+      <li>Created a mock proposal for an HOA Management Company targeting prospective stakeholders.</li>
+      <li>Designed surveys, process documentation, and collaborative strategic communications through UNT coursework.</li>
+      <li>Experienced editing user guides, help content, and technical manuals for grammar, clarity, formatting, and accuracy.</li>
+      <li>Background in grant writing and communication with nonprofit organizations.</li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- DOWNLOAD BAR -->
+<div class="download-bar">
+  <span class="download-bar-text">Want a copy to keep?</span>
+  <a href="Garrett_Brooks_Resume.docx" class="download-btn" download>Download Resume</a>
+</div>
+
+<footer>
+  Garrett Brooks &nbsp;·&nbsp; Denton, TX &nbsp;·&nbsp; garrettwilliambrooks@gmail.com
+</footer>
+
+</body>
+</html>
